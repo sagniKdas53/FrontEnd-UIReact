@@ -7,7 +7,6 @@ import { DISHES } from '../shared/dishes';
 class Main extends Component {
 
   constructor(props) {
-    console.log("Main component constructor invoked");
     super(props);
     this.state = {
       dishes: DISHES,
@@ -15,20 +14,12 @@ class Main extends Component {
     };
   }
 
-  componentDidMount(){
-    console.log("Main component mounted"); 
-  }
-
-  componentDidUpdate(){
-    console.log("Main component updated");
-  }
 
   onDishSelect(dishId) {
     this.setState({ selectedDish: dishId });
   }
 
   render() {
-    console.log("Main component rendered");
     return (
       <div>
         <Navbar dark color="primary">
