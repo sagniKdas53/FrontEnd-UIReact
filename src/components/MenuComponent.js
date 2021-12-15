@@ -4,8 +4,17 @@ import {
 } from 'reactstrap';
 
 class Menu extends Component {
-    
+
+    componentDidMount() {
+        console.log("Menu component mounted");
+    }
+
+    componentDidUpdate() {
+        console.log("Menu component updated");
+    }
+
     render() {
+        console.log("Menu component rendered");
         const menu = this.props.dishes.map((dish) => {
             return (
                 <div className="col-12 col-md-5 m-1" key={dish.id}>

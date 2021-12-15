@@ -29,7 +29,16 @@ class Dishdetail extends Component {
     );
   }
 
+  componentDidMount(){
+    console.log("Dishdetail component mounted"); 
+  }
+
+  componentDidUpdate(){
+    console.log("Dishdetail component updated");
+  }
+
   render() {
+    console.log("Dishdetail rendering");
     //console.log(this.props.dish);
     if (this.props.dish != null) {
       return (
