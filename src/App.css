@@ -41,3 +41,7 @@ a:hover, a:visited, a:link, a:active
 .card-title{
     color: #000;
 }
+
+.header{
+    background-color: #512DA8;
+}
