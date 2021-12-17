@@ -45,3 +45,7 @@ a:hover, a:visited, a:link, a:active
 .header{
     background-color: #512DA8;
 }
+
+.breadcrumb-item{
+    background-color: gainsboro;
+}

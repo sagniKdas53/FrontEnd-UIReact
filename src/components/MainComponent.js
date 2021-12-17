@@ -59,9 +59,3 @@ class Main extends Component {
 }
 
 export default Main;
-/*<Route exact path='/menu' render={() =>
-<div>
-<Menu dishes={this.state.dishes} /> 
-<DishDetail />
-</div>
-} />*/

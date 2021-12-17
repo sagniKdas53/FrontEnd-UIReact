@@ -5,28 +5,29 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Media
+  Media,
 } from "reactstrap";
 import { Link } from "react-router-dom";
 
-function RenderLeader(props) {
+const RenderLeader = (props) => {
   return (
-    <Media>
-      <Media left middle href="#">
+    <Media tag="li">
+      <Media left middle>
         <Media object src={props.leader.image} alt={props.leader.name} />
       </Media>
-      <Media body className="pl-5">
+
+      <Media body className="ml-5">
         <Media heading>{props.leader.name}</Media>
         <p>{props.leader.designation}</p>
         <p>{props.leader.description}</p>
       </Media>
     </Media>
   );
-}
+};
 
 function About(props) {
-  const leaders = props.leaders.map((leader, i) => {
-    return <RenderLeader key={i} leader={leader}></RenderLeader>;
+  const leaders = props.leaders.map((leader) => {
+    return <RenderLeader leader={leader} />;
   });
 
   return (
@@ -84,7 +85,7 @@ function About(props) {
           <Card>
             <CardBody className="bg-faded">
               <blockquote className="blockquote">
-                <p className="mb-2">
+                <p className="mb-0">
                   You better cut the pizza in four pieces because I'm not hungry
                   enough to eat six.
                 </p>
@@ -102,7 +103,7 @@ function About(props) {
       </div>
       <div className="row row-content">
         <div className="col-12">
-          <h2 className="text-left">Corporate Leadership</h2>
+          <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
           <Media list>{leaders}</Media>
