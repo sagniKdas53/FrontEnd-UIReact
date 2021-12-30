@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+/junk
 # production
 /build
 build.7z
