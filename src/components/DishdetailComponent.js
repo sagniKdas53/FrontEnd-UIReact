@@ -38,6 +38,7 @@ function RenderComments({ comments, addComment, dishId }) {
       <ul className="list-unstyled">
         {renderedComments}
       </ul>
+      <CommentForm dishId={dishId} addComment={addComment} />
     </div>
   );
 
@@ -67,7 +68,6 @@ const DishDetail = (props) => {
               addComment={props.addComment}
               dishId={props.dish.id}
             />
-      <CommentForm dishId={dishId} addComment={addComment} />
           </div>
         </div>
       </div>
@@ -83,5 +83,4 @@ const DishDetail = (props) => {
 
 export default DishDetail;
 
-//        this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
-// add this after the redux parts ahve been synced from remote.
+//this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
