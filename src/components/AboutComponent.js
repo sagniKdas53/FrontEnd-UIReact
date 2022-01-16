@@ -1,41 +1,68 @@
-import React from "react";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  Card,
-  CardBody,
-  CardHeader,
-  Media
-} from "reactstrap";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader } from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
+import { Fade, Stagger } from 'react-animation-components';
 
-function RenderLeader(props) {
+function RenderLeader({ leader }) {
   return (
-    <Media>
-      <Media left middle href="#">
-        <Media object src={props.leader.image} alt={props.leader.name} />
-      </Media>
-      <Media body className="pl-5">
-        <Media heading>{props.leader.name}</Media>
-        <p>{props.leader.designation}</p>
-        <p>{props.leader.description}</p>
-      </Media>
-    </Media>
+    <li className="media">
+      <img className="mr-4" src={baseUrl + leader.image} alt="Shot" />
+      <div className="media-body">
+        <h5 className="mt-0 mb-1">{leader.name}</h5>
+        <p>{leader.designation}</p>
+        <p className="mb-4">{leader.description}</p>
+      </div>
+    </li>
   );
 }
 
 function About(props) {
-  const leaders = props.leaders.map((leader, i) => {
-    return <RenderLeader key={i} leader={leader}></RenderLeader>;
-  });
+
+  const leaders = (() => {
+    if (props.leaders.isLoading) {
+      return (
+        <div className="container">
+          <div className="row">
+            <Loading />
+          </div>
+        </div>
+      );
+    }
+    else if (props.leaders.errMess) {
+      return (
+        <div className="container">
+          <div className="row">
+            <h4>{props.leaders.errMess}</h4>
+          </div>
+        </div>
+      );
+    }
+    else {
+      return (
+        <ul className="list-unstyled">
+          <Stagger in>
+            {
+              props.leaders.leaders.map((leader) => {
+                return (
+                  <Fade in>
+                    <RenderLeader leader={leader} />
+                  </Fade>
+                );
+              })
+            }
+          </Stagger>
+        </ul>
+      );
+    }
+  })();
 
   return (
     <div className="container">
       <div className="row">
         <Breadcrumb>
-          <BreadcrumbItem>
-            <Link to="/home">Home</Link>
-          </BreadcrumbItem>
+          <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
           <BreadcrumbItem active>About Us</BreadcrumbItem>
         </Breadcrumb>
         <div className="col-12">
@@ -46,26 +73,12 @@ function About(props) {
       <div className="row row-content">
         <div className="col-12 col-md-6">
           <h2>Our History</h2>
-          <p>
-            Started in 2010, Ristorante con Fusion quickly established itself as
-            a culinary icon par excellence in Hong Kong. With its unique brand
-            of world fusion cuisine that can be found nowhere else, it enjoys
-            patronage from the A-list clientele in Hong Kong. Featuring four of
-            the best three-star Michelin chefs in the world, you never know what
-            will arrive on your plate the next time you visit us.
-          </p>
-          <p>
-            The restaurant traces its humble beginnings to{" "}
-            <em>The Frying Pan</em>, a successful chain started by our CEO, Mr.
-            Peter Pan, that featured for the first time the world's best
-            cuisines in a pan.
-          </p>
+          <p>Started in 2010, Ristorante con Fusion quickly established itself as a culinary icon par excellence in Hong Kong. With its unique brand of world fusion cuisine that can be found nowhere else, it enjoys patronage from the A-list clientele in Hong Kong.  Featuring four of the best three-star Michelin chefs in the world, you never know what will arrive on your plate the next time you visit us.</p>
+          <p>The restaurant traces its humble beginnings to <em>The Frying Pan</em>, a successful chain started by our CEO, Mr. Peter Pan, that featured for the first time the world's best cuisines in a pan.</p>
         </div>
         <div className="col-12 col-md-5">
           <Card>
-            <CardHeader className="bg-primary text-white">
-              Facts At a Glance
-            </CardHeader>
+            <CardHeader className="bg-primary text-white">Facts At a Glance</CardHeader>
             <CardBody>
               <dl className="row p-1">
                 <dt className="col-6">Started</dt>
@@ -102,10 +115,10 @@ function About(props) {
       </div>
       <div className="row row-content">
         <div className="col-12">
-          <h2 className="text-left">Corporate Leadership</h2>
+          <h2>Corporate Leadership</h2>
         </div>
         <div className="col-12">
-          <Media list>{leaders}</Media>
+          {leaders}
         </div>
       </div>
     </div>
